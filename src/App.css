@@ -1,38 +1,137 @@
+/* Base styles */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
+.App-header {
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  color: #61dafb; /* React blue color */
+  margin-bottom: 20px;
+  font-size: 2em; /* Font size for header */
+}
+
+.App-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80%;
+}
+
+.diary-form {
+  background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #61dafb;
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #262626;
+  color: #e0e0e0;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #61dafb;
+  outline: none;
+  box-shadow: 0 0 10px #61dafb;
+}
+
+.form-group input[type="date"] {
+  color: #e0e0e0;
+}
+
+.form-group textarea {
+  height: 120px;
+  resize: none;
+}
+
+button[type="submit"] {
+  background-color: #61dafb;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1em;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 15px;
+}
+
+button[type="submit"]:hover {
+  background-color: #21a1f1;
+  transform: scale(1.05);
+}
+
+.entries-display {
+  background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #e0e0e0;
+}
+
+.entries-display h2 {
+  color: #61dafb;
+  font-size: 1.5em;
+}
+
+.entry {
+  background-color: #2c2c2c;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  width: 100%;
+  word-wrap: break-word; /* Ensure long words break to the next line */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+.entry h3 {
+  margin: 0;
+  font-size: 1.2em;
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.entry p {
+  margin: 5px 0;
+  word-wrap: break-word; /* Ensure long words break to the next line */
 }
