@@ -4,5 +4,5 @@ This project was created to learn more React and to get familiar with PostgreSQL
 - Install all dependencies using npm i
 # Instruction to Run
 - Replace backend key with your key from Supabase
-- Start the backend server using npm start
+- Start the backend server using npm run backend
 - Start the frontend using npm start
