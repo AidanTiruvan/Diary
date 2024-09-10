@@ -5,16 +5,16 @@ function App() {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [entry, setEntry] = useState("");
-  const [entries, setEntries] = useState([]);
+  const [rowInserted, setrowInserted] = useState(0);
 
   const [entryData, setEntryData] = useState([]);
 
-  function handleFormSubmit(ev) {
+  async function handleFormSubmit(ev) {
     ev.preventDefault();
     const url = ("http://localhost:3001/api"+"/submit")
     console.log("Form submitted to:", url);
 
-    fetch(url, {
+    const submittedEntryResponse = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -22,46 +22,78 @@ function App() {
       },
       body: JSON.stringify({ title, date, entry})
     })
-    .then(response => {
-      response.json().then(json => {
-        console.log('result', json);
+    const submittedEntryjson = await submittedEntryResponse.json() 
+    console.log('result', submittedEntryjson);
 
-        setEntries([...entries, json]);
-        setTitle("");
-        setDate("");
-        setEntry("");
-      });
-    });
-    
-    fetch("http://localhost:3001/api/diaries", {
-      method: 'GET',
+    setrowInserted(rowInserted + 1);
+    setTitle("");
+    setDate("");
+    setEntry("");
+
+
+
+    // fetch(url, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //     ,'Accept': 'application/json'
+    //   },
+    //   body: JSON.stringify({ title, date, entry})
+    // })
+    // .then(response => {
+    //   response.json().then(json => {
+    //     console.log('result', json);
+
+    //     setEntries([...entries, json]);
+    //     setTitle("");
+    //     setDate("");
+    //     setEntry("");
+    //   });
+    // });
+
+    const diaryResponse = await fetch("http://localhost:3001/api/diaries", {
+      method: 'GET' ,
       headers: {
         'Content-type': 'application/json'
       }, 
-    }) .then(response => {
-      response.json().then(json => {
-        console.log('result', json);
+    })
+    const jsonDiary = await diaryResponse.json()
+      
+    console.log('result', jsonDiary);
+    setEntryData(jsonDiary.data)
 
-        setEntryData(json.data)
-    })});
+    // fetch("http://localhost:3001/api/diaries", {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-type': 'application/json'
+    //   }, 
+    // }) .then(response => {
+    //   response.json().then(json => {
+    //     console.log('result', json);
+
+    //     setEntryData(json.data)
+    // })});
 
     
 
 
   }
-  useEffect(() =>{
-    fetch("http://localhost:3001/api/diaries", {
-      method: 'GET',
+  async function initialDiaryFetch(){
+        const diaryResponse = await fetch("http://localhost:3001/api/diaries", {
+      method: 'GET' ,
       headers: {
         'Content-type': 'application/json'
       }, 
-    }) .then(response => {
-      response.json().then(json => {
-        console.log('result', json);
-
-        setEntryData(json.data)
-    })});
-  })
+    })
+    console.log("result before converting to json", diaryResponse)
+    const jsonDiary = await diaryResponse.json()
+      
+    console.log('result', jsonDiary);
+    setEntryData(jsonDiary.data)
+  }
+  useEffect (() =>{
+    initialDiaryFetch()
+  }, [rowInserted])
 
   return (
     <div className="App">

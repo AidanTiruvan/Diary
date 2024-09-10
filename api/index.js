@@ -1,3 +1,4 @@
+//import statements
 const express = require("express");
 const app = express();
 const cors = require ('cors');
@@ -16,6 +17,8 @@ app.get("/api/test", (req, res) => {
 });
 
 app.post("/api/submit", async(req, res) => {
+
+
   const {title, date, entry} = req.body
   await client.query("INSERT INTO diary (title, date, entry) VALUES ($1, $2, $3)", [title, date, entry])
 });
